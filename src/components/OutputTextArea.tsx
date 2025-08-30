@@ -85,11 +85,11 @@ const OutputTextArea = ({ color }: OutputProps) => {
               className="p-1 border-2 rounded-md border-gray-400"
               onClick={start}
             >
-              <img className="w-7" src="/sound_max_fill.svg" alt="" />
+              <img className="w-7 hover:w-8" src="/sound_max_fill.svg" alt="" />
             </button>
             <button className="p-1 border-2 rounded-md border-gray-400"
             onClick={(e) => copyTextToClipboard(e,translatedText)}>
-              <img className="w-7" src="/Copy.svg" alt="" />
+              <img className="w-7 hover:w-8" src="/Copy.svg" alt="" />
             </button>
           </div>
         </div>
