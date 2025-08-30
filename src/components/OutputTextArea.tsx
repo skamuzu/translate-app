@@ -60,7 +60,7 @@ const OutputTextArea = ({ color }: OutputProps) => {
               </li>
             </ul>
           <div className="pr-6 "> 
-            <img className="w-10 p-1 border-2 rounded-xl border-gray-400" src="/Horizontal_top_left_main.svg"/>
+            <img className="w-10 p-1 border-4 rounded-xl border-gray-400" src="/Horizontal_top_left_main.svg"/>
           </div>
           </div>
           <hr className="border-b-1 border-[#D6D9DC] self-center w-15/16 " />
@@ -82,12 +82,12 @@ const OutputTextArea = ({ color }: OutputProps) => {
           <div className="px-4 flex gap-2 pl-8 items-center justify-between">
             <button
               type="button"
-              className="p-1 border-2 rounded-md border-gray-400"
+              className="p-1 border-4 rounded-md border-gray-400"
               onClick={start}
             >
               <img className="w-7 hover:w-8" src="/sound_max_fill.svg" alt="" />
             </button>
-            <button className="p-1 border-2 rounded-md border-gray-400"
+            <button className="p-1 border-4 rounded-md border-gray-400"
             onClick={(e) => copyTextToClipboard(e,translatedText)}>
               <img className="w-7 hover:w-8" src="/Copy.svg" alt="" />
             </button>

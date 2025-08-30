@@ -99,14 +99,14 @@ const InputTextArea = ({ color }: InputProps) => {
           <div className="px-4 flex gap-2 pl-8 items-center justify-between">
             <button
               type="button"
-              className="p-1 border-2 rounded-md border-gray-400"
+              className="p-1 border-4 rounded-md border-gray-400"
               onClick={start}
             >
               <img className="w-7 hover:w-8" src="/sound_max_fill.svg" alt="" />
             </button>
             <button
               type="button"
-              className="p-1 border-2 rounded-md border-gray-400 "
+              className="p-1 border-4 rounded-md border-gray-400 "
               onClick={(e) => copyTextToClipboard(e,sentence)}
             >
               <img className="w-7 hover:w-8" src="/Copy.svg" alt="" />
