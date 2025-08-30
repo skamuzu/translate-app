@@ -7,7 +7,7 @@ import { LangContext } from "../contexts/LangContext";
 import { useSpeech } from "react-text-to-speech";
 
 const OutputTextArea = ({ color }: OutputProps) => {
-  let { outputLang, setOutputLang, translatedText, inputLang } =
+  let { outputLang, setOutputLang, translatedText, inputLang, copyTextToClipboard } =
     useContext(LangContext)!;
   const { start } = useSpeech({ text: translatedText });
 
@@ -87,7 +87,8 @@ const OutputTextArea = ({ color }: OutputProps) => {
             >
               <img className="w-7" src="/sound_max_fill.svg" alt="" />
             </button>
-            <button className="p-1 border-2 rounded-md border-gray-400">
+            <button className="p-1 border-2 rounded-md border-gray-400"
+            onClick={(e) => copyTextToClipboard(e,translatedText)}>
               <img className="w-7" src="/Copy.svg" alt="" />
             </button>
           </div>

@@ -8,7 +8,7 @@ type InputProps = {
 };
 
 const InputTextArea = ({ color }: InputProps) => {
-  let { inputLang, setInputLang, outputLang, setTranslatedText } =
+  let { inputLang, setInputLang, outputLang, setTranslatedText, copyTextToClipboard } =
     useContext(LangContext)!;
   const [sentence, setSentence] = useState<string>("");
 
@@ -107,6 +107,7 @@ const InputTextArea = ({ color }: InputProps) => {
             <button
               type="button"
               className="p-1 border-2 rounded-md border-gray-400"
+              onClick={(e) => copyTextToClipboard(e,sentence)}
             >
               <img className="w-7" src="/Copy.svg" alt="" />
             </button>
