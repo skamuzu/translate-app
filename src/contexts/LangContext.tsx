@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, use } from "react";
 import { toast } from "react-toastify";
 import "../App.css"
 interface LangContextType {
@@ -12,6 +12,8 @@ interface LangContextType {
     e: React.MouseEvent<HTMLButtonElement>, 
     text: string
   ) => Promise<void>;
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const LangContext = createContext<LangContextType | null>(null);
@@ -20,6 +22,7 @@ export const LangContextProvider = ({ children }: { children: React.ReactNode })
   const [inputLang, setInputLang] = useState<string>("en");
   const [outputLang, setOutputLang] = useState<string>("fr");
   const [translatedText, setTranslatedText] = useState<string>("")
+  const [loading,setLoading] = useState<boolean>(false)
   const copyTextToClipboard = async (e: React.MouseEvent<HTMLButtonElement>,text: string) => {
     e.preventDefault()
   try {
@@ -34,7 +37,7 @@ export const LangContextProvider = ({ children }: { children: React.ReactNode })
 };
 
   return (
-    <LangContext.Provider value={{ inputLang, setInputLang, outputLang, setOutputLang, translatedText, setTranslatedText, copyTextToClipboard }}>
+    <LangContext.Provider value={{ inputLang, setInputLang, outputLang, setOutputLang, translatedText, setTranslatedText, copyTextToClipboard, loading, setLoading }}>
       {children}
     </LangContext.Provider>
   );

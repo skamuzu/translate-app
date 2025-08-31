@@ -5,10 +5,17 @@ type OutputProps = {
 };
 import { LangContext } from "../contexts/LangContext";
 import { useSpeech } from "react-text-to-speech";
+import { ClipLoader } from "react-spinners";
 
 const OutputTextArea = ({ color }: OutputProps) => {
-  let { outputLang, setOutputLang, translatedText, inputLang, copyTextToClipboard } =
-    useContext(LangContext)!;
+  let {
+    outputLang,
+    setOutputLang,
+    translatedText,
+    inputLang,
+    copyTextToClipboard,
+    loading,
+  } = useContext(LangContext)!;
   const { start } = useSpeech({ text: translatedText });
 
   function handleOutputLang(
@@ -59,23 +66,32 @@ const OutputTextArea = ({ color }: OutputProps) => {
                 </button>
               </li>
             </ul>
-          <div className="pr-6 "> 
-            <img className="w-10 p-1 border-4 rounded-xl border-gray-400" src="/Horizontal_top_left_main.svg"/>
-          </div>
+            <div className="pr-6 ">
+              <img
+                className="w-10 p-1 border-4 rounded-xl border-gray-400"
+                src="/Horizontal_top_left_main.svg"
+              />
+            </div>
           </div>
           <hr className="border-b-1 border-[#D6D9DC] self-center w-15/16 " />
         </div>
 
         <div className="px-6 py-4 relative">
-          <textarea
-            className="w-full h-55 text-white outline-0 text-lg font-semibold resize-none"
-            value={
-              inputLang !== outputLang
-                ? translatedText
-                : "Select two different languages"
-            }
-            disabled
-          ></textarea>
+          {loading ? (
+            <div className="flex justify-center items-center h-55">
+              <ClipLoader color="#D6D9DC" size={35} />
+            </div>
+          ) : (
+            <textarea
+              className="w-full h-55 text-white outline-0 text-lg font-semibold resize-none"
+              value={
+                inputLang !== outputLang
+                  ? translatedText
+                  : "Select two different languages"
+              }
+              disabled
+            ></textarea>
+          )}
         </div>
 
         <div className="flex justify-between items-center pb-4">
@@ -87,8 +103,10 @@ const OutputTextArea = ({ color }: OutputProps) => {
             >
               <img className="w-7 hover:w-8" src="/sound_max_fill.svg" alt="" />
             </button>
-            <button className="p-1 border-4 rounded-md border-gray-400"
-            onClick={(e) => copyTextToClipboard(e,translatedText)}>
+            <button
+              className="p-1 border-4 rounded-md border-gray-400"
+              onClick={(e) => copyTextToClipboard(e, translatedText)}
+            >
               <img className="w-7 hover:w-8" src="/Copy.svg" alt="" />
             </button>
           </div>

@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { LangContext } from "../contexts/LangContext";
 import { useSpeech } from "react-text-to-speech";
+import { useVoices } from "react-text-to-speech";
 
 type InputProps = {
   color: string;
 };
 
 const InputTextArea = ({ color }: InputProps) => {
-  let { inputLang, setInputLang, outputLang, setTranslatedText, copyTextToClipboard } =
+  let { inputLang, setInputLang, outputLang, setTranslatedText, copyTextToClipboard, setLoading } =
     useContext(LangContext)!;
   const [sentence, setSentence] = useState<string>("");
 
@@ -20,10 +21,12 @@ const InputTextArea = ({ color }: InputProps) => {
   ) {
     e.preventDefault();
     setInputLang(lang);
+    setSentence("")
   }
 
   async function fetchTranslation(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true)
     try {
       const url = new URL("https://api.mymemory.translated.net/get");
       url.searchParams.append("q", sentence);
@@ -38,6 +41,8 @@ const InputTextArea = ({ color }: InputProps) => {
       setTranslatedText(data.responseData.translatedText);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -90,6 +95,7 @@ const InputTextArea = ({ color }: InputProps) => {
             maxLength={500}
             onChange={(e) => {
               setSentence(e.target.value);
+              setTranslatedText("")
             }}
           ></textarea>
           <p className="absolute bottom-8 right-10 font-bold">{sentence.length}/500</p>
